@@ -1,35 +1,29 @@
 #include <stdio.h>
-struct Placar{
-char time1[50];
-char time2[50];
-int golsdotime1;
-int golsdotime2;
-
-
+struct produto{
+    char nome[50];
+    float preco;
+    int quantidade;
 };
-
 int main(){
-struct Placar jogo;
+    struct produto p;
 
-printf("Digite o nome do time 1: ");
-scanf("%s", jogo.time1);
-printf("Digite o nome do time 2: ");
-scanf("%s", jogo.time2);
-printf("Digite o número de gols do time 1: ");
-scanf("%d", &jogo.golsdotime1);
-printf("Digite o número de gols do time 2: ");
-scanf("%d", &jogo.golsdotime2);
+    printf("Digite o nome do produto: ");
+    scanf("%s", p.nome);
+    printf("Digite o preco do produto: ");
+    scanf("%f", &p.preco);
+    printf("Digite a quantidade do produto: ");
+    scanf("%d", &p.quantidade);
 
-printf("Placar do jogo:\n");
-printf("%s: %d gols\n", jogo.time1, jogo.golsdotime1);
-printf("%s: %d gols\n", jogo.time2, jogo.golsdotime2);
+    printf("Produto: %s\n", p.nome);
+    printf("Preço: R$ %.2f\n", p.preco);
+    printf("Quantidade: %d\n", p.quantidade);
 
-if (jogo.golsdotime1 > jogo.golsdotime2) {
-    printf("O vencedor é: %s\n", jogo.time1);
-} else if (jogo.golsdotime2 > jogo.golsdotime1) {
-    printf("O vencedor é: %s\n", jogo.time2);
-} else {
-    printf("EMPATE.\n");
-}
-return 0;
+    float total, desconto;
+    total= p.preco * p.quantidade;
+    desconto = total * 0.9;
+    
+    printf("\nproduto: %s\n", p.nome);
+    printf("Total: R$ %.2f\n", total);
+    printf("valor com desconto: R$ %.2f\n", desconto);
+    return 0;
 }
