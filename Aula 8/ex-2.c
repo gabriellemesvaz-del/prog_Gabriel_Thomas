@@ -23,3 +23,4 @@ int potencia(int base, int exp) {
 
     return base * potencia(base, exp - 1);
 }
+
