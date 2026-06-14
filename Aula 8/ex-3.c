@@ -36,3 +36,5 @@ void progressiva(int n) {
     progressiva(n - 1);
     printf("%d\n", n);
 }
+
+
