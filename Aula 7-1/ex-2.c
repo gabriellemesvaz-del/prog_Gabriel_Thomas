@@ -2,112 +2,94 @@
 
 typedef struct {
     char nome[50];
-    float preco;
-    int quantidade;
-    float totalEstoque;
-} Produto;
+    int vitorias;
+    int empates;
+    int derrotas;
+    int pontos;
+} Time;
 
-void lerProdutos(Produto est[], int n);
-void calcularEstoque(Produto est[], int n);
-void imprimirEstoque(Produto est[], int n);
-int encontrarMaiorEstoque(Produto est[], int n);
-int encontrarMenorPreco(Produto est[], int n);
+// Protótipos
+void lerTimes(Time times[], int n);
+void calcularPontos(Time times[], int n);
+void imprimirClassificacao(Time times[], int n);
+int encontrarLider(Time times[], int n);
 
 int main() {
-    int n, maior, menor;
+    int n, lider;
 
-    printf("Quantidade de produtos: ");
+    printf("Quantidade de times: ");
     scanf("%d", &n);
 
-    Produto est[n];
+    Time times[n];
 
-    lerProdutos(est, n);
-    calcularEstoque(est, n);
-    imprimirEstoque(est, n);
+    lerTimes(times, n);
+    calcularPontos(times, n);
+    imprimirClassificacao(times, n);
 
-    maior = encontrarMaiorEstoque(est, n);
-    menor = encontrarMenorPreco(est, n);
+    lider = encontrarLider(times, n);
 
-    printf("\nProduto com maior valor em estoque: %s\n",
-           est[maior].nome);
-
-    printf("Produto com menor preco: %s\n",
-           est[menor].nome);
+    printf("\nLider do torneio: %s (%d pontos)\n",
+           times[lider].nome,
+           times[lider].pontos);
 
     return 0;
 }
 
-void lerProdutos(Produto est[], int n) {
+void lerTimes(Time times[], int n) {
     int i;
 
     for (i = 0; i < n; i++) {
-        printf("\nProduto %d\n", i + 1);
+        printf("\nTime %d\n", i + 1);
 
         printf("Nome: ");
-        scanf(" %[^\n]", est[i].nome);
+        scanf(" %[^\n]", times[i].nome);
 
-        printf("Preco: ");
-        scanf("%f", &est[i].preco);
+        printf("Vitorias: ");
+        scanf("%d", &times[i].vitorias);
 
-        printf("Quantidade: ");
-        scanf("%d", &est[i].quantidade);
+        printf("Empates: ");
+        scanf("%d", &times[i].empates);
+
+        printf("Derrotas: ");
+        scanf("%d", &times[i].derrotas);
     }
 }
 
-void calcularEstoque(Produto est[], int n) {
+void calcularPontos(Time times[], int n) {
     int i;
 
     for (i = 0; i < n; i++) {
-        est[i].totalEstoque =
-            est[i].preco * est[i].quantidade;
+        times[i].pontos =
+            (times[i].vitorias * 3) +
+            times[i].empates;
     }
 }
 
-void imprimirEstoque(Produto est[], int n) {
+void imprimirClassificacao(Time times[], int n) {
     int i;
-    float totalGeral = 0;
 
-    printf("\n=== ESTOQUE ===\n");
-
-    printf("%-20s %-10s %-10s %-10s\n",
-           "Nome", "Preco", "Qtd", "Total");
+    printf("\n=== CLASSIFICACAO ===\n");
+    printf("%-20s %-5s %-5s %-5s %-7s\n",
+           "Time", "V", "E", "D", "Pontos");
 
     for (i = 0; i < n; i++) {
-        printf("%-20s %-10.2f %-10d %-10.2f\n",
-               est[i].nome,
-               est[i].preco,
-               est[i].quantidade,
-               est[i].totalEstoque);
-
-        totalGeral += est[i].totalEstoque;
+        printf("%-20s %-5d %-5d %-5d %-7d\n",
+               times[i].nome,
+               times[i].vitorias,
+               times[i].empates,
+               times[i].derrotas,
+               times[i].pontos);
     }
-
-    printf("\nValor total do estoque: R$ %.2f\n",
-           totalGeral);
 }
 
-int encontrarMaiorEstoque(Produto est[], int n) {
-    int i, maior = 0;
+int encontrarLider(Time times[], int n) {
+    int i, lider = 0;
 
     for (i = 1; i < n; i++) {
-        if (est[i].totalEstoque >
-            est[maior].totalEstoque) {
-            maior = i;
+        if (times[i].pontos > times[lider].pontos) {
+            lider = i;
         }
     }
 
-    return maior;
-}
-
-int encontrarMenorPreco(Produto est[], int n) {
-    int i, menor = 0;
-
-    for (i = 1; i < n; i++) {
-        if (est[i].preco <
-            est[menor].preco) {
-            menor = i;
-        }
-    }
-
-    return menor;
+    return lider;
 }
