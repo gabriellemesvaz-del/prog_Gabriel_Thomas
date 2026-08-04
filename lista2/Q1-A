@@ -1,1 +1,5 @@
 
+Os dois ingredientes obrigatórios de uma função recursiva são:
+
+Caso-base: condição que encerra a recursão, evitando chamadas infinitas.
+Chamada recursiva: a função chama a si mesma com um problema menor, aproximando-se do caso-base.
