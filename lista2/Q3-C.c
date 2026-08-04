@@ -19,7 +19,6 @@ int main()
     printf("Digite uma palavra: ");
     scanf("%s", palavra);
 
-    // Calcula o tamanho da string sem usar strlen
     while (palavra[i] != '\0')
     {
         i++;
