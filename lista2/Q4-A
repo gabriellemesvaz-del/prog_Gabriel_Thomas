@@ -1,0 +1,7 @@
+Em uma busca binária, a cada passo a quantidade de elementos é dividida por 2.
+
+Para 512 itens:
+
+512-256-128-64-32-16-8-4-2-1
+
+São 9 divisões, então no pior caso são necessários 9 passos.
